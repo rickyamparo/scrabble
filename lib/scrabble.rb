@@ -1,7 +1,31 @@
+require 'pry'
+
 class Scrabble
 
   def score(word)
-    1
+    total_score = 0
+    if word != nil
+      word = word.upcase
+      word = word.split(//)
+      local_hash = point_values
+      word.each do |key|
+        total_score += local_hash[key]
+      end
+    end
+    total_score
+  end
+
+  def score_with_multipliers (word, multiplier)
+    word = word.upcase.split(//)
+    local_hash = point_values
+    binding.pry
+    word_points = word.map do |key|
+      key = local_hash[key]
+    end
+    index = 0
+    while index < word.length
+      word_points[index] = word_points[index] * multiplier[index]
+    end
   end
 
   def point_values
